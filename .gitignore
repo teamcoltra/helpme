@@ -1,2 +1,4 @@
 helpme.exe
 go.sum
+binaries/
+binarybuilder.ps1

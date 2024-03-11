@@ -15,9 +15,13 @@ import (
 func configPath() string {
 	var configDir string
 	if runtime.GOOS == "windows" {
-		configDir = os.Getenv("USERPROFILE") + "\\AppData\\Local\\helpme\\"
+		configDir = os.Getenv("USERPROFILE") + "\\AppData\\Local\\helpme\\helpme.conf"
+	} else if runtime.GOOS == "darwin" {
+		// For macOS, use the standard application support directory
+		configDir = os.Getenv("HOME") + "/Library/Application Support/helpme/helpme.conf"
 	} else {
-		configDir = os.Getenv("HOME") + "/.helpme/"
+		// Default to using a hidden directory in the user's home directory for Linux and other Unix-like OS
+		configDir = os.Getenv("HOME") + "/.helpme/helpme.conf"
 	}
 	return configDir + "helpme.yml"
 }
